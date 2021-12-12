@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import ColorfulMesssage from './components/ColorfulMessage'
+// 命名の確約
+import { ColorfulMesssage } from './components/ColorfulMessage'
 // React 17移行ではトランスパイラによって自動追加されるためimport React from 'react'が不要に;
 // .js、.jsxが指定可能
 // jsx記法、ひとつの親タグにしなくてはならない
