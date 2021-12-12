@@ -1,43 +1,46 @@
-import React, {useState, useEffect} from 'react';
-// 命名の確約
-import { ColorfulMesssage } from './components/ColorfulMessage'
-// React 17移行ではトランスパイラによって自動追加されるためimport React from 'react'が不要に;
-// .js、.jsxが指定可能
-// jsx記法、ひとつの親タグにしなくてはならない
-// <>または<React.Fragment>
-// イベントやオブジェクト名はキャメルケース(ラクダ記法) font-size⇒fontSize
-// {}はJavaScriptとして処理する。、階層１つ目はjsのオブジェクト
-const App = () => {
-  // ステート、左辺が値、右辺がセッター
-  const [num, setNum] = useState(-1);
-  const [faceShowFlag, setFaceShowFlag] = useState(true);
+import React, { useState } from 'react';
+import "./styles.css"
 
-  // 関数
-  const onClickCountUp = () => setNum(num + 1);
-  const onClickSwitchShowFlag = () => setFaceShowFlag(!faceShowFlag);
-
-  //(関数,配列)
-  useEffect(() => {
-    if (num !== 0 && num % 3 === 0){
-      faceShowFlag || setFaceShowFlag(true);
-    } else {
-      faceShowFlag && setFaceShowFlag(false);
-    }
-  }, [num]);
-
+export const App = () => {
+  const [incompleteTodos, setincompleteTodos] = useState(['test1','test2']);
+  const [completeTodos, setcompleteTodos] = useState(['aa','bb']);
   return (
     <>
-      <h1 style={{ color: 'red' }}>こんにちは！</h1>
-      <ColorfulMesssage color='blue'>お元気ですか？</ColorfulMesssage>
-      <ColorfulMesssage color='pink'>元気です!</ColorfulMesssage>
-      <button onClick={onClickCountUp}>カウントアップ</button>
-      <br/>
-      <button onClick={onClickSwitchShowFlag}>on/off</button>
-      <p>{num}</p>
-      {faceShowFlag && <p>( *´艸｀)</p>}
-      
+      <div className="input-area">
+        <input placeholder="TODOを入力" />
+        <button>追加</button>
+      </div>
+      <div className="incomplete-area">
+        <p className="title">未完了のTODO</p>
+        <ul>
+          { incompleteTodos.map((todo) => {
+            return (
+            <li key={todo}>
+              <div className="list-row">
+                <p>{todo}</p>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            </li>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="complete-area">
+      <p className="title">完了のTODO</p>
+        <ul>
+        { completeTodos.map((todo) => {
+            return (
+            <li key={todo}>
+              <div className="list-row">
+                <p>{todo}</p>
+                <button>戻る</button>
+              </div>
+            </li>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 };
-
-export default App;
